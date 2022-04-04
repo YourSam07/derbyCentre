@@ -1,0 +1,20 @@
+{
+  "name": "derbycentre",
+  "version": "1.0.0",
+  "description": "Derby Centre Project For Edureka Web Dev Internship",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "author": "Sankalp Sethi",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.9"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
