@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins:wght@300;400;500;600;700&family=Satisfy&display=swap');
+
+*,
+*::after,
+*::before{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root{
+  --green: #A7D129;
+
+  /* Fonts */
+  --poppins: 'Poppins', sans-serif;
+  --satisfy: 'Satisfy', cursive;
+}
+

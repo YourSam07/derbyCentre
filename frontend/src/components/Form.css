@@ -1,0 +1,104 @@
+.form-page{
+    background-image: url('../../public/Assets/register.jpg');
+    /* background-position: center; */
+    background-size: cover;
+    min-height: 105vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-wrapper{
+    backdrop-filter: blur(16px) saturate(180%);
+    min-height: 400px;
+    min-width: 450px;
+    padding: 1.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 0.5rem;
+}
+
+.formRegister{
+    display: flex;
+    flex-direction: column;
+}
+
+.formRegister > h1 {
+    font-family: var(--satisfy);
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.inFields{
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    color: black;
+    font-family: var(--poppins);
+    border-radius: 0.5rem;
+}
+
+.googleBtn{
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    font-size: 1.1rem;
+    font-family: var(--poppins);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.googleBtn:hover{
+    background-color: aliceblue;
+}
+
+.googleBtn > span {
+    margin-right: 1rem;
+}
+
+.inFields:not(:last-child){
+    margin-bottom: 1rem;
+}
+
+.divider{
+    width: 98%;
+    text-align: center;
+    border-bottom: 1px solid white;
+    line-height: 0.1em;
+    margin: 1.2rem 0;
+}
+
+.divider span{
+    width: 10px;
+    color: white;
+    font-size: 1rem;
+    background-color: #240606;
+}
+
+button{
+    background-color: white;
+    color: black;
+    padding: 0.8rem 1.5rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+button:hover{
+    cursor: pointer;
+    background-image: linear-gradient(45deg, #85F4FF, #B8FFF9) ;
+}
+
+@media only screen and (max-width: 426px){
+    .form-wrapper{
+        min-width: 350px;
+        padding: 0.7rem;
+    } 
+}
+
+@media only screen and (max-width: 321px){
+    .form-wrapper{
+        min-width: 310px;
+        padding: 0.5rem;
+    } 
+}

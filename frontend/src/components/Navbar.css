@@ -1,0 +1,92 @@
+.navbar{
+    position: fixed;
+    display: grid;
+    grid-template-columns: 3fr 1fr 1.1fr;
+    /* place-items: center; */
+    align-items: center;
+    background-color: transparent;
+    padding: 0 0.7rem;
+    height: 80px;
+    width: 100%;
+    /* opacity: 0.9; */
+    z-index: 1;
+    transition: all 0.5s ease-out;
+}
+
+.navbar--logo{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.navbar--logo > a > img{
+    height: 43px;
+    width: 38px;
+    align-self: center;
+}
+
+.title{
+    color: white;
+    font-family: 'Satisfy', cursive;
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.tgBtn{
+    justify-self: end;
+}
+
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-self: flex-end;
+    align-items: center;
+}
+
+.menu--icon{
+    display: none;
+}
+
+
+@media only screen and (max-width: 768px){
+    .navbar{
+        grid-template-columns: 1fr 0.5fr 0.5fr;
+    }
+    
+    .menu{
+        display: none;
+    }
+
+    .menu--icon{
+        display: block;
+        justify-self: end;
+    }
+
+    .title{
+        font-size: 1.5rem;
+    }
+    
+    .mobile{
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        text-align: center;
+        background-color: black;
+        width: 100%;
+        min-height: 100vh;
+        z-index: 20;
+    }
+
+    .nav--links{
+        margin: 0.25rem 0;
+        font-size: 1.5rem;
+        width: 90%;
+    }
+
+    .nav--links:hover{
+      text-decoration: underline;
+      border: none;
+    }
+}
+

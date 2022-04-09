@@ -1,0 +1,41 @@
+.footer{
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 0.8fr;
+    gap: 2rem;
+    width: 100%;
+    padding: 2rem;
+    background-color: #10140d;
+}
+
+.details, .contact {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2rem;
+    color: var(--green);
+}
+
+.details img{
+    height: 48px;
+    width: 40px;
+    margin-bottom: 0.5rem;
+}
+
+.socialMedia a{
+    margin-right: 1rem;
+}
+
+.icons:hover{
+    color: white;
+}
+
+.socialMedia > p {
+    font-size: 1.2rem;
+    color: var(--green);
+}
+
+@media only screen and (max-width: 768px){
+    .footer{
+        grid-template-columns: 1fr;
+    }
+}
+

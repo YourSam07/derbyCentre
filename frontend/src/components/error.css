@@ -1,0 +1,22 @@
+.errWrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    position: absolute;
+    top: 80px;
+    width: 100%;
+}
+
+.errmsg{
+    color: black;
+    font-size: 1.5rem;
+}
+
+.hide{
+    display: none;
+}
+
+.closeIcon{
+    cursor: pointer;
+}

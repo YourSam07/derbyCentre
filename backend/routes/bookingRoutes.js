@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const { getBookings, bookBooking, changeBooking, cancelBooking } = require('../controllers/bookingController');
+const {protect}= require('../middleware/authMiddleware')
 
-router.route('/').get(getBookings).post(bookBooking)
-router.route('/:id').put(changeBooking).delete(cancelBooking)
+
+router.route('/').get(protect, getBookings).post(protect, bookBooking)
+router.route('/:id').put(protect, changeBooking).delete(protect, cancelBooking)
 
 //          OR
 // router.get('/', getBookings)

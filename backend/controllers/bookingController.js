@@ -2,12 +2,13 @@ const asyncHandler = require('express-async-handler')
 const { globalAgent } = require('http')
 
 const Bookings = require('../models/bookingsModel')
+const User = require('../models/userModel')
 
 // @desc    Get all the bookings
 // @route   GET /api/bookings
 // @access  Private 
 const getBookings = asyncHandler(async(req, res) => {
-    const bookings = await Bookings.find()
+    const bookings = await Bookings.find({ user: req.user.id })
     res.status(200).json(bookings)
 })
 
@@ -21,7 +22,8 @@ const bookBooking = asyncHandler(async(req, res) => {
     }
 
     const booking = await Bookings.create({
-        text: req.body.text
+        text: req.body.text, 
+        user: req.user.id
     })
 
     res.status(200).json(booking)
@@ -35,6 +37,20 @@ const changeBooking = asyncHandler(async(req, res) => {
 
     if(!booking) {
         throw new Error('Booking not Found')
+    }
+
+    const user = await User.findById(req.user.id)
+
+    // check for user
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Make sure the logged in user matches the booking 
+    if(booking.user.toString() != user.id){
+        res.status(401)
+        throw new Error('User not authorized')
     }
 
     const updatedBooking = await Bookings.findByIdAndUpdate(req.params.id, req.body, {
@@ -52,6 +68,20 @@ const cancelBooking = asyncHandler(async(req, res) => {
     if(!booking){
         res.status(400)
         throw new Error('Booking not Found')
+    }
+
+    const user = await User.findById(req.user.id)
+
+    // check for user
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+
+    // Make sure the logged in user matches the booking 
+    if(booking.user.toString() != user.id){
+        res.status(401)
+        throw new Error('User not authorized')
     }
 
     await booking.remove()
