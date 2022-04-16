@@ -53,7 +53,6 @@
 
 input:checked + .slider {
     background-color: white;
-    border: 3px solid white;
 }
   
 input:focus + .slider {
@@ -63,6 +62,6 @@ input:focus + .slider {
 input:checked + .slider > .circle{
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    transform: translateX(20px);
     background-color: white; 
 }

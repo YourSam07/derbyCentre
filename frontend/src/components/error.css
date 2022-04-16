@@ -3,9 +3,10 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 0.5rem 1rem;
-    position: absolute;
+    position: sticky;
     top: 80px;
     width: 100%;
+    z-index: 1;
 }
 
 .errmsg{

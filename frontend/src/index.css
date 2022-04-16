@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+a{
+  text-decoration: none;
+}
+
 :root{
   --green: #A7D129;
 

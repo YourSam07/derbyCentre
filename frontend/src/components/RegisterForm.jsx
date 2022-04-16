@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './Form.css'
 import GoogleLogin from 'react-google-login';
 import { FcGoogle } from "react-icons/fc";
 import axios from 'axios'
 import Error from './Error'
-
+import { ThemeContext } from '../contexts/theme';
+import { Link, useNavigate } from 'react-router-dom'
 
 function RegisterForm() {
+  const navigate = useNavigate();
+
+  const [{theme}] = useContext(ThemeContext)
   const [errorMsg, setErrorMsg] = useState(null)
   const [values, setValues] = useState({
     name: '',
@@ -19,30 +23,41 @@ function RegisterForm() {
     e.preventDefault();
     setErrorMsg(null);
     try {
-      const data = await axios.post('http://localhost:8000/api/users', {
+        await axios.post('http://localhost:8000/api/users', {
         name: values.name,
         email: values.email,
         password: values.pass1,
       })
-      console.log(data)
+      navigate('/signin', {state: {isRegistered: true}})
     } catch (error) {
       console.log(error.response.data.message)
       setErrorMsg(error.response.data.message)
     }
   }
 
-  const loginResponseGoogle = (response) => {
+  const registerResponseGoogle = async (response) => {
     console.log(response)
+    try {
+        await axios.post('http://localhost:8000/api/users', {
+        name: response.profileObj.name,
+        email: response.profileObj.email,
+        password: response.accessToken
+      })
+      navigate('/signin', {state: {isRegistered: true}})
+    } catch (error) {
+      console.log(error)
+      setErrorMsg(error.response.data.message)
+    }
   }
 
   return (
     <>
       {errorMsg ? <Error color='rgb(255, 93, 126)'>{errorMsg}</Error>: null}
-      <div className='form-page'>
-        <div className="form-wrapper">
+      <div className='form-page' style={{backgroundColor: theme.backgroundColor}}>
+        <div className="form-wrapper" style={{backgroundImage: theme.formColor}}>
           
           <form onSubmit={submitFunc} className="formRegister" >
-            <h1>Register</h1>
+            <h1 style={{color: theme.color}}>Register</h1>
             <input className='inFields' type="text" id="name"  placeholder='Enter Your Full Name' autoComplete='off' onChange={(e) => {setValues({...values, name: e.target.value})}} />
             <input className='inFields' type="email" id="email"  placeholder='Enter Your Email Address' autoComplete='off' onChange={(e) => {setValues({...values, email: e.target.value})}}/>
             <input className='inFields' type="password" id="pass" placeholder='Enter Password' onChange={(e) => {setValues({...values, pass1: e.target.value})}}/>
@@ -50,8 +65,8 @@ function RegisterForm() {
             <button type="submit">Submit</button>
           </form>
           
-          <div className="divider">
-              <span>or</span>
+          <div className="divider" style={{borderBottom: `1px solid ${theme.color}`}}>
+              <span style={{backgroundColor: 'transparent', color: theme.color}}>or</span>
           </div>
 
           <GoogleLogin
@@ -63,10 +78,17 @@ function RegisterForm() {
                 </button>
             )}
             buttonText="Login"
-            onSuccess={loginResponseGoogle}
-            onFailure={loginResponseGoogle}
+            onSuccess={registerResponseGoogle}
+            onFailure={registerResponseGoogle}
             cookiePolicy={'single_host_origin'}
           />
+
+          <div className="lineInForm" style={{backgroundColor: theme.color}}></div>
+
+          <div className="goto" style={{color: theme.color}}>
+              Already have an account? 
+              <Link to='/signin'><span> Login</span></Link>
+          </div>
 
 
         </div>

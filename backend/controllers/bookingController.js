@@ -1,8 +1,16 @@
 const asyncHandler = require('express-async-handler')
-const { globalAgent } = require('http')
-
 const Bookings = require('../models/bookingsModel')
 const User = require('../models/userModel')
+
+
+
+// @desc    Get all the bookings
+// @route   GET /api/bookings
+// @access  Public
+const getAllBookingDetail = asyncHandler(async(req, res) => {
+    const bookingOnThisDate = await Bookings.find({date: req.body.date})
+    res.status(200).json(bookingOnThisDate)
+})
 
 // @desc    Get all the bookings
 // @route   GET /api/bookings
@@ -16,14 +24,19 @@ const getBookings = asyncHandler(async(req, res) => {
 // @route   POST /api/bookings
 // @access  Private 
 const bookBooking = asyncHandler(async(req, res) => {
-    if (!req.body.text){
+    if (!req.body.bname || !req.body.phone || !req.body.address || !req.body.date || !req.body.sTime || !req.body.eTime){
         res.status(400)
-        throw new Error('Please add a text field')
+        throw new Error('Please fill all fields')
     }
 
     const booking = await Bookings.create({
-        text: req.body.text, 
-        user: req.user.id
+        user: req.user.id,
+        bookingName: req.body.bname,
+        phoneNumber: req.body.phone,
+        address: req.body.address,
+        date: req.body.date,
+        startTime: req.body.sTime,
+        endTime: req.body.eTime,
     })
 
     res.status(200).json(booking)
@@ -89,6 +102,7 @@ const cancelBooking = asyncHandler(async(req, res) => {
 })
 
 module.exports = {
+    getAllBookingDetail,
     getBookings, 
     bookBooking,
     changeBooking,

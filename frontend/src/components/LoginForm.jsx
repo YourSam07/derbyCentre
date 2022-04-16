@@ -1,13 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './Form.css'
 import GoogleLogin from 'react-google-login';
 import { FcGoogle } from "react-icons/fc";
 import axios from 'axios';
 import Error from './Error';
+import { ThemeContext } from '../contexts/theme';
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 function LoginForm() {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const [{theme}] = useContext(ThemeContext)
   const [errorMsg, setErrorMsg] = useState(null)
-  const [successMsg, setSuccessMsg] = useState(null)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [credentials, setCredentials] = useState({
     email: '',
@@ -21,35 +25,48 @@ function LoginForm() {
       const data = await axios.post('http://localhost:8000/api/users/login', credentials)
       setIsLoggedIn(true)
       setErrorMsg(null)
-      setSuccessMsg('You have succesfully Loggrd In')
+      navigate('/bookings', {state: {isLoggedin: true}})
       console.log(data)
+      localStorage.setItem('userToken', data.data.token)
     } catch (error) {
       console.log(error.response)
-      setSuccessMsg(null)
       setErrorMsg(error.response.data.message)
     }
   }
 
-  const loginResponseGoogle = (response) => {
+  const loginResponseGoogle = async (response) => {    
     console.log(response)
+    try{
+        await axios.post('http://localhost:8000/api/users/login', {
+        email: response.profileObj.email,
+        password: null
+      })
+      setIsLoggedIn(true)
+      setErrorMsg(null)
+      navigate('/bookings', {state: {isLoggedin: true}})
+      localStorage.setItem('userToken', response.accessToken)
+      localStorage.setItem('islogIn', isLoggedIn)
+    } catch (error) {
+      setErrorMsg(error)
+    }
   }
 
   return (
     <>
+    {location.state?.isRegistered ? <Error color='rgb(165, 255, 69)'>You have succefully registered, You can login Now!</Error> : null}
     {errorMsg ? <Error color='rgb(255, 93, 126)'>{errorMsg}</Error> : null}
-    {successMsg ? <Error color='rgb(165, 255, 69)'>{successMsg}</Error> : null}
-    <div className='form-page'>
-      <div className="form-wrapper">
+    <div className='form-page' style={{backgroundColor: theme.backgroundColor}}>
+      <div className="form-wrapper" style={{backgroundImage: theme.formColor}}>
         
         <form onSubmit={logInfunc} className="formRegister">
-          <h1>Sign In</h1>
+          <h1 style={{color: theme.color}}>Sign In</h1>
           <input className='inFields' type="text" name="" id="" placeholder='Enter Your Email Address' onChange={(e) => setCredentials({...credentials, email: e.target.value})}/>
           <input className='inFields' type="password" name="" id="" placeholder='Enter Password' onChange={(e) => setCredentials({...credentials, password: e.target.value})}/>
           <button type="submit">Log In</button>
         </form>
         
-        <div className="divider">
-            <span>or</span>
+        <div className="divider" style={{borderBottom: `1px solid ${theme.color}`}}>
+            <span style={{backgroundColor: 'transparent', color: theme.color}}>or</span>
         </div>
 
         <GoogleLogin
@@ -65,6 +82,13 @@ function LoginForm() {
           onFailure={loginResponseGoogle}
           cookiePolicy={'single_host_origin'}
         />
+
+        <div className="lineInForm" style={{backgroundColor: theme.color}}></div>
+
+        <div className="goto" style={{color: theme.color}}>
+            Don’t have an account? 
+            <Link to='/register'><span> Register Now</span></Link>
+        </div>
 
 
       </div>

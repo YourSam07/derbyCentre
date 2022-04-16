@@ -1,0 +1,16 @@
+.entryContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.entryContainer > div{
+    padding: 1rem;
+}
+
+.entryContainer > div:not(:nth-child(2)){
+    width: 20%;
+}
+
+.entryContainer >:nth-child(2){
+    width: 40%;
+}

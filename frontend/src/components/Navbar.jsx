@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import './Navbar.css';
 import Button from "./Button";
 import { FaBars, FaTimes } from 'react-icons/fa'
-import { useContext } from 'react'
 import { ThemeContext } from '../contexts/theme';
 import ToggleBtn from './ToggleBtn';
-import { Link } from 'react-router-dom';
+import { Link, Router, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-  const [{ theme, isDark}, toggleTheme] = useContext(ThemeContext)
+  const location = useLocation()
+  const [{ theme}, toggleTheme] = useContext(ThemeContext)
   const [ click, setClick ] = useState(false);
   const [ mobileView, setMobileView] = useState(false);
   const [istransparent, setIstransparent] = useState(true)
@@ -25,29 +25,31 @@ const Navbar = () => {
 
   const handleClick = () => setClick(!click);
 
-  const navChangeColor = () =>{
-    setBgColor(theme.backgroundColor)
-    window.onscroll = function() {
+  window.onscroll = function() {
+    if (location.pathname === '/'){
       if (document.body.scrollTop >= 80 || document.documentElement.scrollTop >= 80 ){
-        setBgColor(theme.backgroundColor)
+        setBgColor(theme.navFootColor)
         setIstransparent(false)
         setNavbarOp(1)
-      } else{
+      }
+      else{
         setIstransparent(true)
         setNavbarOp(0.9)
       }
+    } else {
+      setIstransparent(false)
+      setNavbarOp(1)
     }
   }
-  
 
   useEffect(() => {
     checkMobileView();
-    navChangeColor();
+    setBgColor(theme.navFootColor)
   }, [theme, bgcolor])
 
   return (
     <>
-      <div className="navbar" onScroll={() => navChangeColor()} style={istransparent ? {backgroundColor: 'transparent', opacity: navbarOp} : {backgroundColor: bgcolor, opacity: navbarOp}}>
+      <div className="navbar" style={istransparent ? {backgroundColor: 'transparent', opacity: navbarOp} : {backgroundColor: bgcolor, opacity: navbarOp}}>
         <div className="navbar--logo">
           <Link to="/">
             <img src="../Assets/Logo.jpg" alt="" />
