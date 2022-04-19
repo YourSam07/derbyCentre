@@ -58,7 +58,7 @@ function LoginForm() {
           <h1 style={{color: theme.color}}>Sign In</h1>
           <input className='inFields' type="text" name="" id="" placeholder='Enter Your Email Address' onChange={(e) => setCredentials({...credentials, email: e.target.value})}/>
           <input className='inFields' type="password" name="" id="" placeholder='Enter Password' onChange={(e) => setCredentials({...credentials, password: e.target.value})}/>
-          <button type="submit">Log In</button>
+          <button className='formButton'type="submit">Log In</button>
         </form>
         
         <div className="divider" style={{borderBottom: `1px solid ${theme.color}`}}>
@@ -68,7 +68,7 @@ function LoginForm() {
         <GoogleLogin
           clientId="780502215129-j754hcv83ovmqh81uguakfu2kc244os1.apps.googleusercontent.com"
           render={renderProps => (
-              <button className="googleBtn" onClick={renderProps.onClick} disabled={renderProps.disabled}>
+              <button className="googleBtn formButton" onClick={renderProps.onClick} disabled={renderProps.disabled}>
                 <span><FcGoogle /></span>
                 Conitnue with Google
               </button>

@@ -1,8 +1,11 @@
 import React from 'react'
+import DashboardBookEntry from '../components/DashboardBookEntry'
 
 function Dashboard() {
   return (
-    <div>Dashboard</div>
+    <>
+      <DashboardBookEntry />
+    </>
   )
 }
 

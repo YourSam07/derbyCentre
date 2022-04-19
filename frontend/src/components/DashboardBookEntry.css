@@ -1,0 +1,65 @@
+.dashboardSec{
+    display: flex;
+    flex-direction: column;
+    padding: 100px 4rem;
+}
+
+.cardBook{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 170px;
+    margin-bottom: 1rem;
+    border-radius: 0.6rem;
+    box-shadow:0 2px 12px 1px #857e7e;
+    padding: 1rem;
+    background-image: linear-gradient(45deg, rgba(50, 46, 251, 0.736), rgb(0, 225, 255))
+}
+
+.date, .heading{
+    font-family: var(--poppins);
+}
+
+.date{
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.heading{
+    font-size: 1.7rem;
+}
+
+.bookdetails{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.bookdetails > div:not(:first-child){
+    font-size: 1.2rem;
+    font-family: var(--poppins);
+}
+
+.buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1.5rem;
+}
+
+.btnsinbook{
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.5rem;
+    background: none;
+    border: none;
+    box-shadow: 0px 2px 5px 1px gray;
+    background-color: aliceblue;
+}
+
+.btnsinbook:hover{
+    cursor: pointer;
+    background: linear-gradient(135deg, aquamarine, aqua)
+}

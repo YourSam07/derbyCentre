@@ -91,7 +91,7 @@
     font-size: 1.3rem;
 }
 
-button{
+.formButton{
     background-color: white;
     color: black;
     padding: 0.8rem 1.5rem;
@@ -99,7 +99,7 @@ button{
     font-size: 1.4rem;
 }
 
-button:hover{
+.formButton:hover{
     cursor: pointer;
     background-image: linear-gradient(45deg, #85F4FF, #B8FFF9) ;
 }

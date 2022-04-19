@@ -6,7 +6,7 @@ export const UserProvider = ({children}) => {
     const [currentUser, setCurrentUser] = useState({
         name: '',
         isloggedin: false,
-        token: undefined
+        token: ''
     })
     
     if (currentUser.isloggedin){
@@ -19,15 +19,16 @@ export const UserProvider = ({children}) => {
         const islogin = localStorage.getItem("stayLoggedIn") === "true"
         const username = localStorage.getItem("userName")
         const token = localStorage.getItem("token")
+        console.log(token)
         if (islogin){
             setCurrentUser({
                 name: username,
                 isloggedin: islogin,
-                token
+                token: token
             })
         }
 
-    },[])
+    }, [])
       
 
     return (
