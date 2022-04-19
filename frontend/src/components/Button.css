@@ -6,6 +6,10 @@
     margin: 0.4rem;
 }
 
+.btn:hover {
+    cursor: pointer;
+}
+
 .btn--primary{
     color: white;
     background-color: transparent;

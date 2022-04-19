@@ -30,7 +30,6 @@ function RegisterForm() {
       })
       navigate('/signin', {state: {isRegistered: true}})
     } catch (error) {
-      console.log(error.response.data.message)
       setErrorMsg(error.response.data.message)
     }
   }
@@ -41,11 +40,10 @@ function RegisterForm() {
         await axios.post('http://localhost:8000/api/users', {
         name: response.profileObj.name,
         email: response.profileObj.email,
-        password: response.accessToken
+        password: response.profileObj.googleId
       })
       navigate('/signin', {state: {isRegistered: true}})
     } catch (error) {
-      console.log(error)
       setErrorMsg(error.response.data.message)
     }
   }

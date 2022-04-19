@@ -24,9 +24,15 @@ const getBookings = asyncHandler(async(req, res) => {
 // @route   POST /api/bookings
 // @access  Private 
 const bookBooking = asyncHandler(async(req, res) => {
-    if (!req.body.bname || !req.body.phone || !req.body.address || !req.body.date || !req.body.sTime || !req.body.eTime){
+   
+    if (!req.body.bname || !req.body.phone || !req.body.address || !req.body.sTime || !req.body.eTime){
         res.status(400)
         throw new Error('Please fill all fields')
+    }
+
+    if (!req.body.date){
+        res.status(400)
+        throw new Error('YOu forgot to select a date')
     }
 
     const booking = await Bookings.create({

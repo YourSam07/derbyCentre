@@ -5,14 +5,15 @@ import { FcGoogle } from "react-icons/fc";
 import axios from 'axios';
 import Error from './Error';
 import { ThemeContext } from '../contexts/theme';
+import { UserContext } from '../contexts/userContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 function LoginForm() {
   const location = useLocation()
   const navigate = useNavigate()
   const [{theme}] = useContext(ThemeContext)
+  const [{setCurrentUser}] = useContext(UserContext)
   const [errorMsg, setErrorMsg] = useState(null)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [credentials, setCredentials] = useState({
     email: '',
     password: ''
@@ -20,16 +21,12 @@ function LoginForm() {
 
   const logInfunc = async(e) => {
     e.preventDefault();
-    
     try {
       const data = await axios.post('http://localhost:8000/api/users/login', credentials)
-      setIsLoggedIn(true)
       setErrorMsg(null)
-      navigate('/bookings', {state: {isLoggedin: true}})
-      console.log(data)
-      localStorage.setItem('userToken', data.data.token)
+      navigate('/bookings')
+      setCurrentUser({name: data.data.name, isloggedin: true})
     } catch (error) {
-      console.log(error.response)
       setErrorMsg(error.response.data.message)
     }
   }
@@ -37,15 +34,14 @@ function LoginForm() {
   const loginResponseGoogle = async (response) => {    
     console.log(response)
     try{
-        await axios.post('http://localhost:8000/api/users/login', {
+        const data = await axios.post('http://localhost:8000/api/users/login', {
         email: response.profileObj.email,
-        password: null
+        password: response.profileObj.googleId,
       })
-      setIsLoggedIn(true)
+      console.log(data)
       setErrorMsg(null)
-      navigate('/bookings', {state: {isLoggedin: true}})
-      localStorage.setItem('userToken', response.accessToken)
-      localStorage.setItem('islogIn', isLoggedIn)
+      navigate('/bookings')
+      setCurrentUser({name: response.profileObj.name, token: data.data.token, isloggedin: true})
     } catch (error) {
       setErrorMsg(error)
     }

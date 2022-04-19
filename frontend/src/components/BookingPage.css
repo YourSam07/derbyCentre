@@ -81,4 +81,11 @@
     .bookingPage{
         flex-direction: column;
     }
+
+    .leftside{
+        width: 100%;
+    }
+    .rightside{
+        width: 100%;
+    }
 }

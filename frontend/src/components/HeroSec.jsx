@@ -1,15 +1,14 @@
-import React from 'react'
+import React ,{ useContext }from 'react'
 import "./heroSec.css"
 import Button from "./Button";
 import { useLocation, useNavigate } from 'react-router-dom'
+import { UserContext } from '../contexts/userContext'
 
 function HeroSec() {
-  const location = useLocation()
+  const [{currentUser}] = useContext(UserContext)
   const navigate = useNavigate()
   const funcBookNow = () =>{
-    const isloggedin = localStorage.getItem('')
-    console.log(location.state.isLoggedIn)
-    if (location.state?.isLoggedIn){
+    if (currentUser.isloggedin){
       navigate('/bookings')
     } else {
       navigate('/signin')

@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
 import { ThemeContext } from '../contexts/theme'
+import { UserContext } from '../contexts/userContext'
 import Error from './Error'
 import BookingEntry from './BookingEntry'
 import './BookingPage.css'
 import './Form.css'
 import axios from 'axios'
-import { FaIntercom } from 'react-icons/fa'
 
 function BookingPage() {
-  const location = useLocation()
   const [{ theme }] = useContext(ThemeContext)
+  const [{currentUser}] = useContext(UserContext)
   const [bookingDetailsByDate, setBookingDetailsByDate] = useState()
   const [errMsg, setErrMsg] = useState(null)
   const [total, setTotal] = useState(0)
@@ -29,16 +28,18 @@ function BookingPage() {
 
   const postBookingData = async (e) => {
     e.preventDefault()
-    let token = localStorage.getItem('userToken')
+    let token = currentUser.token
 
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     }
+ 
     try {
       const bookData = await axios.post('http://localhost:8000/api/bookings', bookingData, config)
-      console.log(bookData)
+      console.log(bookData)    
     } catch (error) {
-      console.log(error)
+      console.log(error.response.data.message)
+      setErrMsg(error.response.data.message)
     }
   }
 
@@ -57,13 +58,13 @@ function BookingPage() {
   }
 
   const checkTimeClash = (st, et, tval) => {
-
+    
   }
 
   const checkCollisionTimings = (e) => {
     e.preventDefault()
     setBookingData({ ...bookingData, sTime: e.target.value })
-    const found = bookingDetailsByDate.find(({startTime}) => e.target.value === startTime)
+    const found = bookingDetailsByDate.find(({startTime, endTime}) => e.target.value >= startTime && e.target.value < endTime)
     setErrMsg(null)
     setBookEntryErr((prevState) => ({
       ...prevState,
@@ -82,7 +83,7 @@ function BookingPage() {
   return (
     <>
       {errMsg ? <Error color='rgb(255, 93, 126)'>{errMsg}</Error> : null}
-      {location.state?.isLoggedin ? <Error color='rgb(165, 255, 69)'>You have succefully logged in, You can book a slot Now!</Error> : null}
+      { currentUser?.isloggedin ? <Error color='rgb(165, 255, 69)'>You have succefully logged in, You can book a slot Now!</Error> : null}
       <div className="bookingPage" style={{ backgroundColor: theme.backgroundColor }}>
         <div className='leftside' style={{ color: theme.color }}>
           <div className="dateWrapper">
@@ -119,7 +120,7 @@ function BookingPage() {
               <div className="time" style={{ color: theme.color }}>
                 <div className="timeWrapper">
                   <h3 >Start Time</h3>
-                  <input className='timeField' type="time" name="" id="" step='900' autocomplete="off" onChange={(e) => checkCollisionTimings(e)} />
+                  <input className='timeField' type="time" name="" id="" step='900' autoComplete="off" onChange={(e) => checkCollisionTimings(e)} />
                 </div>
                 <div className="timeWrapper">
                   <h3>End Time</h3>

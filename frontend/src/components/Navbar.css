@@ -47,6 +47,67 @@
     display: none;
 }
 
+.icon-show{
+    display: flex;
+    justify-self:end;
+    position: relative;
+}
+
+.drop-down{
+    position: absolute;
+    top: 80px;
+    right: 2px;
+    background-color: black;
+    opacity: 0.9;
+    padding: 1rem;
+}
+
+.drop-down > p{
+    font-size: 1.3rem;
+    padding-bottom: 1rem;
+    color: white;
+    font-family: var(--poppins);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hide{
+    display: none;
+}
+
+.drop-down > p:hover{
+    border-bottom: 2px solid rgb(159, 255, 161);
+    cursor: pointer;
+}
+
+.drop-down > p > span{
+    margin-left: 1rem;
+}
+
+.logout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    cursor: pointer;
+    background: none;
+    border: none;
+    color:white;
+    width: 100%;
+}
+
+.logout:hover{
+    border-bottom: 2px solid rgb(159, 255, 161);
+    background: none;
+}
+
+.logout > span:not(:last-child){
+    margin-right: 0.4rem;
+    font-size: 1.2rem;
+    font-family: var(--poppins);
+}
+
 
 @media only screen and (max-width: 768px){
     .navbar{
@@ -76,6 +137,24 @@
         width: 100%;
         min-height: 100vh;
         z-index: 20;
+    }
+
+    .mobile > p{
+        font-size: 1.3rem;
+        padding-bottom: 1rem;
+        color: white;
+        font-family: var(--poppins);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile > p:hover{
+        border-bottom: 2px solid rgb(159, 255, 161);
+    }
+
+    .mobile > p > span{
+        margin-left: 1rem;
     }
 
     .nav--links{
