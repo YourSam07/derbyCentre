@@ -19,7 +19,6 @@ export const UserProvider = ({children}) => {
         const islogin = localStorage.getItem("stayLoggedIn") === "true"
         const username = localStorage.getItem("userName")
         const token = localStorage.getItem("token")
-        console.log(token)
         if (islogin){
             setCurrentUser({
                 name: username,

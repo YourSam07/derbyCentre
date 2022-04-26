@@ -3,7 +3,7 @@ import "./Button.css";
 import { ThemeContext } from '../contexts/theme'
 
 const STYLES = ['btn--primary', 'btn--outline'];
-const SIZES = ['btn--medium', "btn--large"];
+const SIZES = ['btn--medium', "btn--large", 'btn--extra'];
 
 function Button({ children, btnStyle, size, onclick, transparent}) {
     const [{theme}] = useContext(ThemeContext)

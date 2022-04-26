@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 170px;
+    min-height: 170px;
     margin-bottom: 1rem;
     border-radius: 0.6rem;
     box-shadow:0 2px 12px 1px #857e7e;
@@ -63,3 +63,38 @@
     cursor: pointer;
     background: linear-gradient(135deg, aquamarine, aqua)
 }
+
+.Modal{
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.Modal > h2 {
+    margin-bottom: 1.5rem;
+}
+
+.inwrapper{
+    margin-bottom: 1rem;
+    display: flex;
+justify-content: space-between;
+}
+
+.inwrapper > label {
+    font-size: 1.2rem;
+    font-family: var(--poppins);
+    margin-right: 1rem;
+}
+
+.inwrapper > input {
+    padding: 0.5rem 1rem;
+    font-size: 1.2rem;
+    color: black;
+    font-family: var(--poppins);
+    border-radius: 0.5rem;
+}
+
+.modalBtn {
+    display: grid;
+    place-items: center;
+} 

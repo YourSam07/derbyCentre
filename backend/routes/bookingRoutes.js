@@ -4,8 +4,8 @@ const { getAllBookingDetail ,getBookings, bookBooking, changeBooking, cancelBook
 const {protect}= require('../middleware/authMiddleware')
 
 router.route('/').get(protect, getBookings).post(protect, bookBooking)
-router.route('/:id').put(protect, changeBooking).delete(protect, cancelBooking)
 router.route('/data').post(getAllBookingDetail)
+router.route('/:id').put(protect, changeBooking).delete(protect, cancelBooking)
 
 //          OR
 // router.get('/', getBookings)

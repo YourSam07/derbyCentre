@@ -24,8 +24,9 @@ function LoginForm() {
     try {
       const data = await axios.post('http://localhost:8000/api/users/login', credentials)
       setErrorMsg(null)
-      navigate('/bookings')
-      setCurrentUser({name: data.data.name, isloggedin: true})
+      navigate('/bookings', { state : {  cameFromLogin: true}})
+      console.log(data)
+      setCurrentUser({name: data.data.name, isloggedin: true, token: data.data.token})
     } catch (error) {
       setErrorMsg(error.response.data.message)
     }
@@ -40,7 +41,7 @@ function LoginForm() {
       })
       console.log(data)
       setErrorMsg(null)
-      navigate('/bookings')
+      navigate('/bookings', { state : {  cameFromLogin: true}})
       setCurrentUser({name: response.profileObj.name, token: data.data.token, isloggedin: true})
     } catch (error) {
       setErrorMsg(error)

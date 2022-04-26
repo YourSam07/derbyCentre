@@ -35,17 +35,31 @@ const bookBooking = asyncHandler(async(req, res) => {
         throw new Error('YOu forgot to select a date')
     }
 
-    const booking = await Bookings.create({
-        user: req.user.id,
-        bookingName: req.body.bname,
-        phoneNumber: req.body.phone,
-        address: req.body.address,
+    const alreadyExist =  await Bookings.find({
         date: req.body.date,
         startTime: req.body.sTime,
         endTime: req.body.eTime,
     })
 
-    res.status(200).json(booking)
+    if (alreadyExist) {
+        res.status(400)
+        throw new Error('Already Exists')
+    } else {
+        const booking = await Bookings.create({
+            user: req.user.id,
+            bookingName: req.body.bname,
+            phoneNumber: req.body.phone,
+            address: req.body.address,
+            date: req.body.date,
+            startTime: req.body.sTime,
+            endTime: req.body.eTime,
+        })
+        
+    
+        res.status(200).json(booking)
+    }
+
+    
 })
 
 // @desc    Chaneg slot Timimngs
@@ -72,7 +86,11 @@ const changeBooking = asyncHandler(async(req, res) => {
         throw new Error('User not authorized')
     }
 
-    const updatedBooking = await Bookings.findByIdAndUpdate(req.params.id, req.body, {
+    const updatedBooking = await Bookings.findByIdAndUpdate(req.params.id, {
+        startTime: req.body.st,
+        endTime: req.body.et,
+        date: req.body.dt,
+    }, {
         new: true
     })
     res.status(200).json(updatedBooking)
@@ -106,6 +124,14 @@ const cancelBooking = asyncHandler(async(req, res) => {
     await booking.remove()
     res.status(200).json({id: req.params.id})
 })
+
+const calcTotal = (st, et) => {
+    var hours = parseInt(et.split(':')[0]) - parseInt(st.split(':')[0])
+    var mins = parseInt(et.split(':')[1]) - parseInt(st.split(':')[1])
+    let hourlyRate = hours * 1200
+    let minRate = (mins / 60) * 1200
+    return hourlyRate + minRate
+}
 
 module.exports = {
     getAllBookingDetail,

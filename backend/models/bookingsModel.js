@@ -28,7 +28,7 @@ const bookingSchema = mongoose.Schema({
     },
     endTime: {
         type: String,
-        required: [true, 'Please add a text value']
+        required: [true, 'Please add a text value'],
     }
 },
 {
