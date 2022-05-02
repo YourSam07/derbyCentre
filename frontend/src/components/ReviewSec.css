@@ -1,0 +1,40 @@
+.reviewSec{
+    padding: 1rem;
+}
+
+.reviewSec > h1{
+    margin: 0 0 1rem 7rem;
+    font-family: var(--satisfy);
+}
+
+.cardSec{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.stars{
+    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+}
+
+@media only screen and (max-width: 768px){
+    .cardSec{
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .reviewSec{
+        text-align: center;
+    }
+
+    .reviewSec > h1{
+        margin: 0 0 1rem 0;
+    }
+
+    .stars{
+        justify-content: center;
+    }
+}

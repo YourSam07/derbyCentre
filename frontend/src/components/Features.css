@@ -59,6 +59,23 @@
 
 }
 
+@media only screen and (max-width: 768px){
+    .middle{
+        display: none;
+    }
+
+    .left, .right{
+        width: 0;
+    }
+
+    .featureWrapper{
+        flex-direction: column;
+    }
+
+    .card {
+        width: 350px;
+    }
+}
 
 
 

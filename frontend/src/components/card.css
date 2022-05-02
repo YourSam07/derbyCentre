@@ -1,5 +1,17 @@
-.card{
+.card2{
     min-height: 250px;
-    width: 250px;
-    
+    width: 350px;
+    text-align: center;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+.logo{
+    margin-bottom: 1rem;
+}
+
+.logo img{
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
 }

@@ -8,6 +8,7 @@ function HeroSec() {
   const [{currentUser}] = useContext(UserContext)
   const navigate = useNavigate()
   const funcBookNow = () =>{
+    console.log('working')
     if (currentUser.isloggedin){
       navigate('/bookings')
     } else {
@@ -21,7 +22,8 @@ function HeroSec() {
         <div className="overVid">
           <h1>Book and Play</h1>
           <p>What are you waiting for?</p>
-          <Button btnStyle="btn--outline" size="btn--large" onclick={funcBookNow}>Book Now</Button>
+          {/* <Button btnStyle="btn--outline" size="btn--responsive" onclick={funcBookNow}>Book Now</Button> */}
+          <button className="BookNowBtn" onClick={funcBookNow}>Book Now</button>
         </div>
         
       </div>

@@ -177,7 +177,7 @@ function BookingPage() {
                 <span style={{ color: theme.color }}>Total Payment:</span>
                 <span style={{ color: theme.color }}>{total}</span>
               </div>
-              <button type="submit">Proceed to Payment</button>
+              <button type="submit" className='formButton'>Proceed to Payment</button>
             </form>
           </div>
         </div>

@@ -47,3 +47,16 @@
     font-size: 1.3rem;
 }
 
+.bnt-responsive{
+    padding: 1rem 2rem;
+    font-weight: 700;
+    font-size: 1.7rem
+}
+
+@media only screen and (max-width: 786px){
+    .bnt-responsive{
+        padding: 0.8rem 1.2rem;
+        font-size: 1.2rem
+    }
+}
+

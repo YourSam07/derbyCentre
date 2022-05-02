@@ -60,7 +60,7 @@ function RegisterForm() {
             <input className='inFields' type="email" id="email"  placeholder='Enter Your Email Address' autoComplete='off' onChange={(e) => {setValues({...values, email: e.target.value})}}/>
             <input className='inFields' type="password" id="pass" placeholder='Enter Password' onChange={(e) => {setValues({...values, pass1: e.target.value})}}/>
             <input className='inFields' type="password" id="pass2" placeholder='Confrim your Password' onChange={(e) => {setValues({...values, pass2: e.target.value})}}/>
-            <button type="submit">Submit</button>
+            <button type="submit" className='formButton'>Submit</button>
           </form>
           
           <div className="divider" style={{borderBottom: `1px solid ${theme.color}`}}>

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import "./Button.css";
 import { ThemeContext } from '../contexts/theme'
 
-const STYLES = ['btn--primary', 'btn--outline'];
+const STYLES = ['btn--primary', 'btn--outline', 'btn--responsive'];
 const SIZES = ['btn--medium', "btn--large", 'btn--extra'];
 
 function Button({ children, btnStyle, size, onclick, transparent}) {
